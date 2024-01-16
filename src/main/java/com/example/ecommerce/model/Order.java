@@ -1,5 +1,4 @@
-package com.example.ecommerce.model;
-
+package com.example.ecommerce.model;// Order.java
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -12,6 +11,7 @@ public class Order {
     private String id;
     private String userId;
     private List<String> productIds;
+
     public Order() {
         // Default constructor
     }

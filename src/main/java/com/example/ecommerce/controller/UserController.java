@@ -1,28 +1,46 @@
 package com.example.ecommerce.controller;
 
 import com.example.ecommerce.model.User;
-import com.example.ecommerce.repository.UserRepository;
+import com.example.ecommerce.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import javax.annotation.security.PermitAll;
 
-import java.util.List;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("api/users")
 public class UserController {
 
+    private final UserService userService;
+
     @Autowired
-    private UserRepository userRepository;
-
-    @GetMapping
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
-    @PostMapping
-    public User addUser(@RequestBody User user) {
-        return userRepository.save(user);
+    @PostMapping("/register")
+    @PermitAll
+    public ResponseEntity<String> registerUser(@RequestBody User user) {
+        try {
+            userService.registerUser(user);
+            return new ResponseEntity<>("User registered successfully", HttpStatus.CREATED);
+        } catch (DuplicateKeyException e) {
+            return new ResponseEntity<>("Username is already taken", HttpStatus.BAD_REQUEST);
+        }
     }
 
-    // Add other CRUD operations as needed...
+    @PostMapping("/login")
+    @PermitAll
+    public ResponseEntity<String> loginUser(@RequestBody User user) {
+
+        if (userService.validateUserCredentials(user.getUsername(), user.getPassword())) {
+            return new ResponseEntity<>("Login successful", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Invalid credentials", HttpStatus.UNAUTHORIZED);
+        }
+    }
+
 }
