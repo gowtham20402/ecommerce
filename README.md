@@ -18,7 +18,7 @@ Welcome to our E-Commerce application, a simple application developed with Sprin
 1. **Java Development Kit (JDK):**
    - Download and install the latest version of the JDK.
 2. **Apache Maven:**
-   - Download and install Maven 
+   - Download and install Maven.
 3. **MongoDB Database:**
    - Install MongoDB on your machine and ensure MongoDB is running on the default port (`27017`) 
 
@@ -32,7 +32,6 @@ Welcome to our E-Commerce application, a simple application developed with Sprin
 
    ```bash
    git clone https://github.com/gowtham20402/ecommerce.git
-   cd ecommerce
 
 2. Configure MongoDB:
 
@@ -45,21 +44,32 @@ Welcome to our E-Commerce application, a simple application developed with Sprin
 
 ## API Endpoints
 
-    Products:
-        GET /products: Get all products
-        GET /products/{productId}: Get product by ID
-        POST /products: Create a new product
-        PUT /products/{productId}: Update a product
-        DELETE /products/{productId}: Delete a product
+### Users
 
-    Orders:
-        GET /orders: Get all orders
-        POST /orders: Create a new order
-        GET /orders/user/{userId}: Get orders for a specific user
+| Method | Endpoint                    | Description                      |
+|--------|-----------------------------|----------------------------------|
+| POST   | `/api/users/register`       | Register a new user              |
+| POST   | `/api/users/login`          | Login as a user                  |
 
-    Users:
-        POST /api/users/register: Register a new user
-        POST /api/users/login: Login as a user
+### Products
+
+| Method | Endpoint                    | Description             |
+|--------|-----------------------------|-------------------------|
+| GET    | `/products`                 | Get all products        |
+| GET    | `/products/{productId}`     | Get product by ID       |
+| POST   | `/products`                 | Create a new product    |
+| PUT    | `/products/{productId}`     | Update a product        |
+| DELETE | `/products/{productId}`     | Delete a product        |
+
+### Orders
+
+| Method | Endpoint                    | Description             |
+|--------|-----------------------------|-------------------------|
+| GET    | `/orders`                   | Get all orders          |
+| POST   | `/orders`                   | Create a new order      |
+| GET    | `/orders/user/{userId}`     | Get orders for a user   |
+
+
 
 ## Testing
 
